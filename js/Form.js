@@ -25,7 +25,7 @@ class Form {
         form.addEventListener('submit', (e) => {
             this.submitForm(e, markerInfo);
         });
-        new Canvas()
+        new Canvas();
 
 
     }
