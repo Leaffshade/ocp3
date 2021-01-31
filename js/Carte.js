@@ -5,7 +5,7 @@ class Carte {
         this.initCarte();
     }
 
-    initCarte(){
+    initCarte(){ /** Methode (nom d'une fonction dans une classe) **/
         /*** map ***/
         var lyon = [45.757284, 4.841696];
         var map = L.map('map').setView(lyon, 6); /***latitude, longitude, zoom de la map ***/
@@ -14,19 +14,19 @@ class Carte {
         }).addTo(map);
 
 
-        var request = new XMLHttpRequest();
-        var markers = L.markerClusterGroup();
-        map.addLayer(markers);
-        var self = this;
+        var request = new XMLHttpRequest(); /*** Crée un objet ***/
+        var markers = L.markerClusterGroup(); /** Ajout de markers **/
+        map.addLayer(markers); /** le calque est regroupé dans un bloc de données vide. **/
+        var self = this; /** This sera une fonction **/
     
-        request.onreadystatechange = function() {
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                var response = JSON.parse(this.responseText);
+        request.onreadystatechange = function() { /** Fonction à exécuter chaque fois que l'état de l'objet XMLRequest change **/
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) { /**Lorsque la propriété readyState vaut 4 et que la propriété status est 200, la réponse est prête **/
+                var response = JSON.parse(this.responseText); /**La propriété responseText renvoie la réponse du serveur **/
 
-                response.forEach(element => {
+                response.forEach(element => { /** contient la fonction qui va traiter la réponse du serveur **/
                     const marker = L.marker([element.position.lat, element.position.lng]);
                     marker.on('click', () => {
-                        self.onClickMarker(element)
+                        self.onClickMarker(element) /** écoute l'événement */
                     })
                     markers.addLayer(marker);
                 });

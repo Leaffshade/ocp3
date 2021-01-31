@@ -14,16 +14,16 @@ class Reservation {
 
     stopTimer() {
         clearInterval(this.intervalID)
-        sessionStorage.setItem('timer', 1200)
+        sessionStorage.setItem('timer', 1200) // La sessionStorage est de 20 min (1200 secnd)
     }
 
     displayTimer(timer){
         const $timer = document.querySelector('#timer')
-        let minutes = Math.floor(timer / 60);
-        let seconds = timer - minutes * 60;
+        let minutes = Math.floor(timer / 60); // Pour obtenir le nombre de minutes complètes, diviser le nombre total de secondes par 60 (60 secondes / minute)
+        let seconds = timer - minutes * 60; // Pour obtenir les secondes restantes, multiplier les minutes complètes par 60 et soustraire le nombre total de secondes
     
         if(minutes < 10){
-            minutes =  `0${minutes}`;
+            minutes =  `0${minutes}`; // Condition : Si les minutes sont à un chiffre (<10), ajouter un zéro non significatif
         }
     
         if(seconds < 10) {

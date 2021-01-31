@@ -9,7 +9,7 @@ class Canvas {
     this.context.lineWidth = 2;
     this.isDrawing = false;
     this.clear();
-    this.bindEvents();
+    this.bindEvents(); //attache un ou plusieurs gestionnaires d'événements pour les éléments sélectionnés
   }
 
   bindEvents() {
@@ -21,9 +21,9 @@ class Canvas {
       e.preventDefault(); // Eviter le scroll
       this.startDrawing(this.getTouchPosition(e));
     });
-    this.canvas.addEventListener('touchmove', (e) => {
-      e.preventDefault();
-      this.draw(this.getTouchPosition(e))
+    this.canvas.addEventListener('touchmove', (e) => { 
+      e.preventDefault(); // Annule l'événement
+      this.draw(this.getTouchPosition(e)) // Position de la souris
     });
     this.canvas.addEventListener('touchstop', (e) => this.stopDrawing());
     clearCanvas.addEventListener('click', () => {

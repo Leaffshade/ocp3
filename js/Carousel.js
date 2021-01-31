@@ -54,30 +54,30 @@ class Carousel {
         this.showSlides(this.slideIndex += n);
     }
     
-    // Thumbnail image controls
-    currentSlide(n) {
+    // Commande des images 
+    currentSlide(n) { // Afficher la diapositive actuelle
         this.showSlides(this.slideIndex = n);
     }
 
     showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
+        var i; // Selectionne tout les éléments avec la class mySlides
+        var slides = document.getElementsByClassName("mySlides"); // Toutes les diapositives du document 
         var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {
-            this.slideIndex = 1
+        if (n > slides.length) { // Si le numéro de la diapositive est supérieur au nombre total de diapositives
+            this.slideIndex = 1  // if réinitialise le slideIndex à 1, une fois que la dernière diapositive est atteinte.
         }
-        if (n < 1) {
-            this.slideIndex = slides.length
+        if (n < 1) { // Si le numéro de la diapositive est inférieur au nombre total de diapositives
+            this.slideIndex = slides.length // Boucle: définit slideIndex sur le nombre total de diapositives dans l'instance où l'utilisateur clique sur la flèche gauche lorsque la première diapositive est affichée, de sorte que la dernière diapositive s'affiche ensuite
         }
     
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+        for (i = 0; i < slides.length; i++) { // Masquer chacune des diapositives
+            slides[i].style.display = "none"; // afficher la diapo à l'index actuel de la diapo, soustraire un pour rendre l'index numérique 0
         }
-        for (i = 0; i < dots.length; i++) {
+        for (i = 0; i < dots.length; i++) { // Remplace chacun des points par la classe "active" avec ""
             dots[i].className = dots[i].className.replace(" active", "");
         }
-        slides[this.slideIndex - 1].style.display = "block";
-        dots[this.slideIndex - 1].className += " active";
+        slides[this.slideIndex - 1].style.display = "block"; //Définir la diapositive actuelle pour qu'elle s'affiche en tant qu'élément de bloc
+        dots[this.slideIndex - 1].className += " active"; // Définit le point respectif de la diapositive actuelle sur la classe "active"
     }
 
     play() {
