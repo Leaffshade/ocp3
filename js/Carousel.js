@@ -16,7 +16,7 @@ class Carousel {
         document.querySelector('.next').addEventListener('click', () => this.plusSlides(1))
         document.querySelector('.prev').addEventListener('click', () => this.plusSlides(-1))
 
-        // Utilisation d'un fonction flechée pour la conservation du contexte (this)
+        // Utilisation d'une fonction flechée pour la conservation du contexte (this)
         // Si utilisation du mot clé function, on écrase le contexte de la classe
         $(document).keyup((touche) => { // on écoute l'évènement keyup()
 

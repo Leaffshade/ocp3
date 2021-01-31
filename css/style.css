@@ -92,12 +92,14 @@ img {
 #startCycle {
   position: relative;
   z-index: 2;
+  margin-top: 145px;
 }
 
 #stopCycle {
   position: absolute;
   margin-left: 124%;
   z-index: 2;
+  margin-top: 145px;
 }
 
 #carouselButtons :hover {
