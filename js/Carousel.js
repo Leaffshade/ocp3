@@ -1,12 +1,15 @@
 class Carousel {
 
     constructor(){
-        this.initEvents();
+        this.initEvents(); //Appel de la méthode initEvents 
         this.slideIndex = 0;
         this.currentSlide(this.slideIndex);
         this.play();
     }
 
+    /**
+     * Initialisation des évnements qui permettent de naviguer dans le slider
+     */
     initEvents(){
         document.getElementById("startCycle").addEventListener("click", () => this.play())
         document.getElementById("stopCycle").addEventListener("click", () => this.pause())

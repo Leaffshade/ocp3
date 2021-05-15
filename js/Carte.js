@@ -37,6 +37,7 @@ class Carte {
     }
 
     onClickMarker(markerInfo) {
+        // Au click sur un marker, on instancie notre formulaire de réservation
         const form = new Form(markerInfo, this.reservation)
     }
 
