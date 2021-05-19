@@ -1,10 +1,14 @@
 class Carousel {
 
     constructor(){
-        this.initEvents(); //Appel de la méthode initEvents 
+         
         this.slideIndex = 0;
+        
+        this.dots = document.querySelectorAll('.dot');
+        this.slides = document.querySelectorAll(".mySlides");
         this.currentSlide(this.slideIndex);
         this.play();
+        this.initEvents(); //Appel de la méthode initEvents
     }
 
     /**
@@ -43,8 +47,8 @@ class Carousel {
 
         });
 
-        const dots = document.querySelectorAll('.dot');
-        dots.forEach((dot) => {
+        
+        this.dots.forEach((dot) => {
             dot.addEventListener('click', () => {
                 const index = parseInt(dot.dataset.index)
                 this.currentSlide(index)
@@ -64,33 +68,30 @@ class Carousel {
 
     showSlides(n) {
         var i; // Selectionne tout les éléments avec la class mySlides
-        var slides = document.getElementsByClassName("mySlides"); // Toutes les diapositives du document 
-        var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) { // Si le numéro de la diapositive est supérieur au nombre total de diapositives
+        if (n > this.slides.length) { // Si le numéro de la diapositive est supérieur au nombre total de diapositives
             this.slideIndex = 1  // if réinitialise le slideIndex à 1, une fois que la dernière diapositive est atteinte.
         }
         if (n < 1) { // Si le numéro de la diapositive est inférieur au nombre total de diapositives
-            this.slideIndex = slides.length // Boucle: définit slideIndex sur le nombre total de diapositives dans l'instance où l'utilisateur clique sur la flèche gauche lorsque la première diapositive est affichée, de sorte que la dernière diapositive s'affiche ensuite
+            this.slideIndex = this.slides.length // Boucle: définit slideIndex sur le nombre total de diapositives dans l'instance où l'utilisateur clique sur la flèche gauche lorsque la première diapositive est affichée, de sorte que la dernière diapositive s'affiche ensuite
         }
     
-        for (i = 0; i < slides.length; i++) { // Masquer chacune des diapositives
-            slides[i].style.display = "none"; // afficher la diapo à l'index actuel de la diapo, soustraire un pour rendre l'index numérique 0
+        for (i = 0; i < this.slides.length; i++) { // Masquer chacune des diapositives
+            this.slides[i].style.display = "none"; // afficher la diapo à l'index actuel de la diapo, soustraire un pour rendre l'index numérique 0
         }
-        for (i = 0; i < dots.length; i++) { // Remplace chacun des points par la classe "active" avec ""
-            dots[i].className = dots[i].className.replace(" active", "");
+        for (i = 0; i < this.dots.length; i++) { // Remplace chacun des points par la classe "active" avec ""
+            this.dots[i].className = this.dots[i].className.replace(" active", "");
         }
-        slides[this.slideIndex - 1].style.display = "block"; //Définir la diapositive actuelle pour qu'elle s'affiche en tant qu'élément de bloc
-        dots[this.slideIndex - 1].className += " active"; // Définit le point respectif de la diapositive actuelle sur la classe "active"
+        this.slides[this.slideIndex - 1].style.display = "block"; //Définir la diapositive actuelle pour qu'elle s'affiche en tant qu'élément de bloc
+        this.dots[this.slideIndex - 1].className += " active"; // Définit le point respectif de la diapositive actuelle sur la classe "active"
     }
 
     play() {
        
         this.intervalId = setInterval(() => {
-            var slides = document.getElementsByClassName("mySlides");
     
             this.slideIndex++;
     
-            if (this.slideIndex > slides.length) {
+            if (this.slideIndex > this.slides.length) {
                 this.slideIndex = 1;
             }
             this.currentSlide(this.slideIndex)

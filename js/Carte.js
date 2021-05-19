@@ -7,16 +7,15 @@ class Carte {
 
     initCarte(){ /** Methode (nom d'une fonction dans une classe) **/
         /*** map ***/
-        var lyon = [45.757284, 4.841696];
-        var map = L.map('map').setView(lyon, 6); /***latitude, longitude, zoom de la map ***/
+        this.map = L.map('map').setView( [45.757284, 4.841696], 6); /***latitude, longitude, zoom de la map ***/
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', /***affichage calque map***/ {
             maxZoom: 20
-        }).addTo(map);
+        }).addTo(this.map);
 
 
         var request = new XMLHttpRequest(); /*** Crée un objet ***/
-        var markers = L.markerClusterGroup(); /** Ajout de markers **/
-        map.addLayer(markers); /** le calque est regroupé dans un bloc de données vide. **/
+        this.markers = L.markerClusterGroup(); /** Ajout de markers **/
+        this.map.addLayer(this.markers); /** le calque est regroupé dans un bloc de données vide. **/
         var self = this; /** This sera une fonction **/
     
         request.onreadystatechange = function() { /** Fonction à exécuter chaque fois que l'état de l'objet XMLRequest change **/
@@ -28,7 +27,7 @@ class Carte {
                     marker.on('click', () => {
                         self.onClickMarker(element) /** écoute l'événement */
                     })
-                    markers.addLayer(marker);
+                    self.markers.addLayer(marker);
                 });
             }
         };
@@ -38,7 +37,7 @@ class Carte {
 
     onClickMarker(markerInfo) {
         // Au click sur un marker, on instancie notre formulaire de réservation
-        const form = new Form(markerInfo, this.reservation)
+       this.form = new Form(markerInfo, this.reservation)
     }
 
 }

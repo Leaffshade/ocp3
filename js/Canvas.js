@@ -8,6 +8,7 @@ class Canvas {
     this.context.strokeStyle = 'black';
     this.context.lineWidth = 2;
     this.isDrawing = false;
+    this.isEmpty = true;
     this.clear();
     this.bindEvents(); //attache un ou plusieurs gestionnaires d'événements pour les éléments sélectionnés
   }
@@ -59,6 +60,7 @@ class Canvas {
     this.context.moveTo(x, y); //Positionne le curseur
     this.context.beginPath(); // Commencer un nouveau dessin
     this.isDrawing = true;
+    this.isEmpty = false;
   }
 
   stopDrawing() {
@@ -75,8 +77,8 @@ class Canvas {
   }
 
   clear() {
+    this.isEmpty = true;
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    //this.bookBtn.style.display = 'none';
   }
 
 }

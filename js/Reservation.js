@@ -4,11 +4,11 @@ class Reservation {
     startTimer(){
         clearInterval(this.intervalID);
         this.intervalID = setInterval(() => {
-            let timer = sessionStorage.getItem('timer');
-            timer = timer - 1
-            sessionStorage.setItem('timer', timer);
+            this.timer = sessionStorage.getItem('timer');
+            this.timer = this.timer - 1
+            sessionStorage.setItem('timer', this.timer);
             
-            this.displayTimer(timer)
+            this.displayTimer(this.timer)
         }, 1000);
     }
 
@@ -18,7 +18,7 @@ class Reservation {
     }
 
     displayTimer(timer){
-        const $timer = document.querySelector('#timer')
+        this.$timer = document.querySelector('#timer')
         let minutes = Math.floor(timer / 60); // Pour obtenir le nombre de minutes complètes, diviser le nombre total de secondes par 60 (60 secondes / minute)
         let seconds = timer - minutes * 60; // Pour obtenir les secondes restantes, multiplier les minutes complètes par 60 et soustraire le nombre total de secondes
     
@@ -30,20 +30,34 @@ class Reservation {
             seconds = `0${seconds}`;
         }
     
-        $timer.innerHTML = `${minutes} minutes et ${seconds} secondes`;
+        this.$timer.innerHTML = `${minutes} minutes et ${seconds} secondes`;
     }
 
     recapReservation(){
-        const timer = sessionStorage.getItem('timer');
-        const station = sessionStorage.getItem('station')
-        if(timer > 0){
-            const reservationInfo = document.querySelector('#reservation-info');
-            reservationInfo.innerHTML = `
-                <p>Vous avez réservé la station: <b>${station}</b></p>
+        this.timer = sessionStorage.getItem('timer');
+        this.station = sessionStorage.getItem('station')
+        if(this.timer > 0){
+            this.reservationInfo = document.querySelector('#reservation-info');
+            this.reservationInfo.innerHTML = `
+                <p>Vous avez réservé la station: <b>${this.station}</b></p>
                 <p>Il vous reste <b id="timer"></b> de réservation</p>
+                <button id="stop-reservation">Stop réservation</button>
             `;
             this.startTimer();
+            document.querySelector('#stop-reservation').addEventListener('click', (e) => {
+                e.preventDefault();
+                this.stopReservation();
+            })
         }
+    }
+
+    stopReservation(){
+        if(confirm("Etes-vous sur d'annuler la réservation?")){
+            this.reservationInfo.innerHTML = '';
+            sessionStorage.clear();
+            clearInterval(this.intervalID)
+        }
+        
     }
 
 }
